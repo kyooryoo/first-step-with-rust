@@ -1,10 +1,10 @@
 fn main() {
     println!("Hello, error!");
 
-    // // call panic macro 
+    // // call panic macro
     // panic!("Farewell!");
 
-    let v = vec![0,1,2,3,4];
+    let v = vec![0, 1, 2, 3, 4];
     // // index out of bounds causes panic
     // println!("{}", v[5]);
 
@@ -19,7 +19,6 @@ fn main() {
     println!("\nIf exist, you get: {:?}", exist);
     // use unwrap get value from the some variant
     println!("exist.unwrap(): {}", exist.unwrap());
-    
     // Vec::get return None for not existing value
     let not_exist = v.get(5);
     println!("\nIf not exist, you get: {:?}", not_exist);
@@ -28,7 +27,8 @@ fn main() {
     // use match to find a matching pattern
     // notice match is performed by the order of arms
     println!("\nFor the vector: {:?}", v);
-    for index in [0, 3, 5] { // for &index in [0, 3, 5].iter() {
+    for index in [0, 3, 5] {
+        // for &index in [0, 3, 5].iter() {
         match v.get(index) {
             // match Some(3) firstly
             Some(3) => println!("it's 3 in index {}!", index),
@@ -46,8 +46,8 @@ fn main() {
         Some(5) => println!("Match to 5!"),
         Some(3) => println!("Match to 3!"),
         // notice the keyword _ is the wildcard pattern
-        // it matches all possible other conditions 
-        _ => {},
+        // it matches all possible other conditions
+        _ => {}
     }
 
     // use if let operator for SINGLE pattern match
@@ -62,7 +62,6 @@ fn main() {
     // access inner value in Option type with unwrap()
     assert_eq!(&3, v.get(3).unwrap());
     assert_eq!(Option::None, v.get(5));
-    
     // // notice unwarp a None value will cause panic
     // assert_eq!(Option::None, v.get(5)); // wll panic
 
@@ -93,6 +92,17 @@ fn main() {
         last_name: String::from("Stevens"),
     };
     assert_eq!(build_full_name(&alice), "Alice Stevens");
+
+    // // Result<T, E> is similar to Option
+    // enum Result<T, E> {
+    //     Ok(T), // return expected
+    //     Err(E), // return error
+    // }
+
+    // demo result
+    println!("9.0 / 3.0 = {:?}", safe_devision(9.0, 3.0));
+    println!("4.0 / 0.0 = {:?}", safe_devision(4.0, 0.0));
+    println!("0.0 / 2.0 = {:?}", safe_devision(0.0, 2.0));
 }
 
 // for exercise
@@ -111,9 +121,21 @@ fn build_full_name(person: &Person) -> String {
         Some(middle_name) => {
             full_name.push_str(middle_name);
             full_name.push_str(" ");
-        },
+        }
         _ => {}
     }
     full_name.push_str(&person.last_name);
     full_name
+}
+
+// for demo Result
+#[derive(Debug)]
+struct DevisionByZeroError;
+
+fn safe_devision(dividend: f64, divisor: f64) -> Result<f64, DevisionByZeroError> {
+    if divisor == 0.0 {
+        Err(DevisionByZeroError)
+    } else {
+        Ok(dividend / divisor)
+    }
 }

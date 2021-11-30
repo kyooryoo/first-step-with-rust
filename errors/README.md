@@ -29,5 +29,12 @@ Notice, *unwrap* returns a ref such as *&3* but not *3*.
 
 ## Expect
 The *expect(msg)* method works as the same as *unwrap*.
+It returns the inner value if there is no panic. 
 It provides a custom message *msg* if panic happens.
 
+## Result
+Result works in a similar way as Option does.
+It returns *Ok(value)* if things are going on well
+It returns *Err(error)* if error happens.
+Use *unwrap* method to get inner value of *Ok(value)*.
+Use *expect* method to provide custom error message.
