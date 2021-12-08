@@ -71,7 +71,7 @@ fn main() {
     let text = String::from("The quick brown fox jumps over the lazy dog.");
     let fox = Highlight(&text[4..19]);
     let dog = Highlight(&text[35..43]);
-    drop(text); // drop the original string will cause lifetime issue
+    // drop(text); // drop the original string will cause lifetime issue
     println!("{:?}", fox);
     println!("{:?}", dog);
 
