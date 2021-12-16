@@ -1,0 +1,23 @@
+use unittest::Pizza;
+
+#[test]
+fn can_make_pepperoni_pizza() {
+    let pizza = Pizza::pepperoni(12);
+    assert_eq!(pizza.topping, "pepperoni");
+    assert_eq!(pizza.inches, 12);
+}
+
+#[test]
+fn can_make_mozzarella_pizza() {
+    let pizza = Pizza::mozzarella(16);
+    assert_eq!(pizza.topping, "mozzarella");
+    assert_eq!(pizza.inches, 16);
+}
+
+#[test]
+#[should_panic]
+fn cannot_make_mexican_pizza() {
+    let pizza = Pizza::mozzarella(22);
+    assert_eq!(pizza.topping, "mexican");
+    assert_eq!(pizza.inches, 22);
+}
